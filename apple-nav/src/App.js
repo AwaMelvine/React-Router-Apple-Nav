@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
+import NavWrapper from "./components/Navigation/NavWrapper";
 
 function App() {
   return (
     <div className="App">
-      <p>App.js</p>
+      <NavWrapper />
     </div>
   );
 }
