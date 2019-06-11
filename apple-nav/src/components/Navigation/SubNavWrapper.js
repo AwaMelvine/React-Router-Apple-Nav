@@ -24,10 +24,13 @@ const StyledSubNav = styled.div`
 
 const StyleSubNavWrapper = styled.div`
   width: 100%;
-  background: #f6f6f6;
   display: flex;
   align-items: center;
   justify-content: center;
+  ${props =>
+    props.name.toLowerCase() === "tv"
+      ? `background: black; color: white;`
+      : `background: #f6f6f6;`}
 `;
 
 class SubNavWrapper extends React.Component {
@@ -48,8 +51,9 @@ class SubNavWrapper extends React.Component {
     });
   }
   render() {
+    const { name } = this.props.match.params;
     return (
-      <StyleSubNavWrapper>
+      <StyleSubNavWrapper name={name}>
         {this.state.subLinks.map(link => (
           <StyledSubNav>
             <img src={link.img} alt={link.name} />
