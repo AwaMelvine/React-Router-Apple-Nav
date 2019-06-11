@@ -1,4 +1,4 @@
-export const dummyData = [
+export default [
   {
     name: "Mac",
     subLinks: [
