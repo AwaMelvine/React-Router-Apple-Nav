@@ -1,17 +1,14 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import styled from "styled-components";
 import navData from "../../data/navData";
 import Nav from "./Nav";
+import SubNavWrapper from "./SubNavWrapper";
 
 const StyledNav = styled.div`
   margin: 0px;
   background: #303030;
   height: 44px;
-
-  * {
-    color: white;
-    text-decoration: none;
-  }
 
   nav {
     max-width: 80%;
@@ -24,18 +21,38 @@ const StyledNav = styled.div`
     a {
       flex: 1;
       text-align: center;
+      color: white;
+      text-decoration: none;
+
+      &.active {
+        color: lightgray;
+      }
     }
   }
 `;
 
-export default function NavWrapper() {
-  return (
-    <StyledNav>
-      <nav>
-        {navData.map(nav => (
-          <Nav key={nav.name} nav={nav} />
-        ))}
-      </nav>
-    </StyledNav>
-  );
+class NavWrapper extends React.Component {
+  state = {
+    navData: []
+  };
+  componentDidMount() {
+    this.setState({ navData });
+  }
+
+  render() {
+    const { navData } = this.state;
+    return (
+      <StyledNav>
+        <nav>
+          {navData.map(nav => (
+            <Nav key={nav.name} nav={nav} />
+          ))}
+        </nav>
+
+        <Route path="/:name" render={props => <SubNavWrapper {...props} />} />
+      </StyledNav>
+    );
+  }
 }
+
+export default NavWrapper;
